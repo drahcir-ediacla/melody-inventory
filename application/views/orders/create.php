@@ -254,6 +254,7 @@ function checkStock(row_id) {
     var product_id = $("#product_" + row_id).val();
     // Get the user input value
     var userInput = parseInt($("#qty_" + row_id).val());
+    
 
     // Fetch the actual quantity from the server and store it in the hidden input field
     $.ajax({
@@ -261,9 +262,12 @@ function checkStock(row_id) {
       type: 'post',
       data: { product_id: product_id },
       dataType: 'json',
-      success: function (data){
+      success: function (data){        
+      var stockQty = data.qty;
+
 	if (userInput > data.qty) {
-        alert('Insufficient Stock');
+        // alert(`The item has only ${stockQty} left in stock.`);
+        alert('The item has only ' + stockQty + ' left in stock.');
         // Reset the quantity input field to the maximum available quantity (optional)
         $("#qty_" + row_id).val(data.qty).change();
         // Or you can reset it to an empty string to prevent further processing
