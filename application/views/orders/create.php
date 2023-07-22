@@ -8,7 +8,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Add New Orders
+      Add New Order
       <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -56,23 +56,23 @@
                 <div class="col-md-7 col-xs-12 pull pull-left">
 
                   <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Client Name</label>
+                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Customer Name</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter Client Name" autocomplete="off" />
+                      <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter Customer Name" autocomplete="off" />
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Client Address</label>
+                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Customer Address</label>
                     <div class="col-sm-7">
-                      <textarea type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Enter Client Address" autocomplete="off"></textarea>
+                      <textarea type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Enter Customer Address" autocomplete="off"></textarea>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Client Phone</label>
+                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Customer Phone</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Enter Client Phone" autocomplete="off">
+                      <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Enter Customer Phone" autocomplete="off">
                     </div>
                   </div>
                 </div>
@@ -100,13 +100,13 @@
                             <?php endforeach ?>
                           </select>
                         </td>
-                        <td><input type="text" name="qty[]" id="qty_1" class="form-control" required onkeyup="getTotal(1)"></td>
+                        <td><input type="number" name="qty[]" id="qty_1" class="form-control" required onchange="getTotal(1); checkStock(1)"></td>
                         <td>
-                          <input type="text" name="rate[]" id="rate_1" class="form-control" disabled autocomplete="off">
+                          <input type="number" name="rate[]" id="rate_1" class="form-control" disabled autocomplete="off">
                           <input type="hidden" name="rate_value[]" id="rate_value_1" class="form-control" autocomplete="off">
                         </td>
                         <td>
-                          <input type="text" name="amount[]" id="amount_1" class="form-control" disabled autocomplete="off">
+                          <input type="number" name="amount[]" id="amount_1" class="form-control" disabled autocomplete="off">
                           <input type="hidden" name="amount_value[]" id="amount_value_1" class="form-control" autocomplete="off">
                         </td>
                         <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow('1')"><i class="fa fa-close"></i></button></td>
@@ -137,6 +137,16 @@
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="net_amount" name="net_amount" disabled autocomplete="off">
                       <input type="hidden" class="form-control" id="net_amount_value" name="net_amount_value" autocomplete="off">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="paid_status" class="col-sm-5 control-label">Paid Status</label>
+                    <div class="col-sm-7">
+                      <select type="text" class="form-control" id="paid_status" name="paid_status">
+                        <option value="1">Paid</option>
+                        <option value="2">Unpaid</option>
+                      </select>
                     </div>
                   </div>
 
@@ -202,9 +212,9 @@
                         
                       html += '</select>'+
                     '</td>'+ 
-                    '<td><input type="number" name="qty[]" id="qty_'+row_id+'" class="form-control" onkeyup="getTotal('+row_id+')"></td>'+
-                    '<td><input type="text" name="rate[]" id="rate_'+row_id+'" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_'+row_id+'" class="form-control"></td>'+
-                    '<td><input type="text" name="amount[]" id="amount_'+row_id+'" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_'+row_id+'" class="form-control"></td>'+
+                    '<td><input type="number" name="qty[]" id="qty_'+row_id+'" class="form-control" onchange="getTotal('+row_id+'); checkStock('+row_id+')"></td>'+
+                    '<td><input type="number" name="rate[]" id="rate_'+row_id+'" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_'+row_id+'" class="form-control"></td>'+
+                    '<td><input type="number" name="amount[]" id="amount_'+row_id+'" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_'+row_id+'" class="form-control"></td>'+
                     '<td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(\''+row_id+'\')"><i class="fa fa-close"></i></button></td>'+
                     '</tr>';
 
@@ -239,41 +249,69 @@
     }
   }
 
-  // get the product information from the server
-  function getProductData(row_id) {
-  var product_id = $("#product_" + row_id).val();
+    // Function to check stock
+function checkStock(row_id) {
+    var product_id = $("#product_" + row_id).val();
+    // Get the user input value
+    var userInput = parseInt($("#qty_" + row_id).val());
 
-  if (product_id == "") {
-    $("#rate_" + row_id).val("");
-    $("#rate_value_" + row_id).val("");
-    $("#qty_" + row_id).val("");
-    $("#amount_" + row_id).val("");
-    $("#amount_value_" + row_id).val("");
-  } 
-  else {
+    // Fetch the actual quantity from the server and store it in the hidden input field
     $.ajax({
       url: base_url + 'Controller_Orders/getProductValueById',
       type: 'post',
       data: { product_id: product_id },
       dataType: 'json',
-      success: function (response) {
-        // setting the rate value into the rate input field
-        $("#rate_" + row_id).val(response.price);
-        $("#rate_value_" + row_id).val(response.price);
-
-        $("#qty_" + row_id).val(1);
-        $("#qty_value_" + row_id).val(1);
-
-        var total = Number(response.price) * 1;
-        total = total.toFixed(2);
-        $("#amount_" + row_id).val(total);
-        $("#amount_value_" + row_id).val(total);
-
+      success: function (data){
+	if (userInput > data.qty) {
+        alert('Insufficient Stock');
+        // Reset the quantity input field to the maximum available quantity (optional)
+        $("#qty_" + row_id).val(data.qty).change();
+        // Or you can reset it to an empty string to prevent further processing
+        // $("#qty_" + row_id).val("");
         subAmount();
+      }
+    }
+  });
+}
 
-        // Check if the quantity is equal to 0
+  // get the product information from the server
+  function getProductData(row_id)
+  {
+    var product_id = $("#product_"+row_id).val();    
+    if(product_id == "") {
+      $("#rate_"+row_id).val("");
+      $("#rate_value_"+row_id).val("");
+
+      $("#qty_"+row_id).val("");           
+
+      $("#amount_"+row_id).val("");
+      $("#amount_value_"+row_id).val("");
+
+    } else {
+      $.ajax({
+        url: base_url + 'Controller_Orders/getProductValueById',
+        type: 'post',
+        data: {product_id : product_id},
+        dataType: 'json',
+        success:function(response) {
+          // setting the rate value into the rate input field
+          
+          $("#rate_"+row_id).val(response.price);
+          $("#rate_value_"+row_id).val(response.price);
+
+          $("#qty_"+row_id).val(1);
+          $("#qty_value_"+row_id).val(1);
+
+          var total = Number(response.price) * 1;
+          total = total.toFixed(2);
+          $("#amount_"+row_id).val(total);
+          $("#amount_value_"+row_id).val(total);
+          
+          subAmount();
+
+          // Check if the quantity is equal to 0
         if (response.qty <= 0) {
-          alert('The item has insufficient quantities or is out of stock!');
+          alert('The item is out of stock!');
 
           // Reset product_id after the alert is closed
           // Set value to empty string and trigger change event
@@ -287,11 +325,10 @@
       },
       error: function (xhr, status, error) {
         // Handle the error
-      } // /success
-    }); // /ajax function to fetch the product data 
+        } // /success
+      }); // /ajax function to fetch the product data 
+    }
   }
-}
-
 
   // calculate the total amount of the order
   function subAmount() {

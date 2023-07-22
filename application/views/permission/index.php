@@ -44,7 +44,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="groupTable" class="table table-bordered table-striped">
+              <table class="table table-bordered table-striped permission-table">
                 <thead>
                 <tr>
                   <th>Permission Name</th>

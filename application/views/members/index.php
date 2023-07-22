@@ -6,11 +6,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Manage Members 
+        Manage Users 
               </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url('dashboard') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Members</li>
+        <li class="active">Users</li>
       </ol>
     </section>
 
@@ -42,7 +42,7 @@
             
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="userTable" class="table table-bordered table-hover table-striped">
+              <table id="userTable" class="table table-bordered table-hover table-striped users-table">
                 <thead>
                 <tr>
                   <th>Username</th>

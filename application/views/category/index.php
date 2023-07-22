@@ -44,7 +44,7 @@
           
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="manageTable" class="table table-bordered table-hover table-striped">
+            <table id="manageTable" class="table table-bordered table-hover table-striped category-table">
               <thead>
               <tr>
                 <th>Category</th>

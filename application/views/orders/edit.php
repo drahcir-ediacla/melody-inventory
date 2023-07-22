@@ -55,23 +55,23 @@
                 <div class="col-md-7 col-xs-12 pull pull-left">
 
                   <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Client Name</label>
+                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Customer Name</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter Client Name" value="<?php echo $order_data['order']['customer_name'] ?>" autocomplete="off"/>
+                      <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="Enter Customer Name" value="<?php echo $order_data['order']['customer_name'] ?>"  onchange="handleFormChange()"autocomplete="off"/>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Client Address</label>
+                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Customer Address</label>
                     <div class="col-sm-7">
-                      <textarea type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Enter Client Address" value="<?php echo $order_data['order']['customer_address'] ?>" autocomplete="off"></textarea> 
+                      <textarea type="text" class="form-control" id="customer_address" name="customer_address" placeholder="Enter Customer Address" value="<?php echo $order_data['order']['customer_address'] ?>" onchange="handleFormChange()" autocomplete="off"></textarea> 
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Client Phone</label>
+                    <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Customer Phone</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Enter Client Phone" value="<?php echo $order_data['order']['customer_phone'] ?>" autocomplete="off">
+                      <input type="text" class="form-control" id="customer_phone" name="customer_phone" placeholder="Enter Customer Phone" value="<?php echo $order_data['order']['customer_phone'] ?>" onchange="handleFormChange()" autocomplete="off">
                     </div>
                   </div>
                 </div>
@@ -97,14 +97,14 @@
                         <?php //print_r($v); ?>
                        <tr id="row_<?php echo $x; ?>">
                          <td>
-                          <select class="form-control select_group product" data-row-id="row_<?php echo $x; ?>" id="product_<?php echo $x; ?>" name="product[]" style="width:100%;" onchange="getProductData(<?php echo $x; ?>)" required>
+                          <select class="form-control select_group product" data-row-id="row_<?php echo $x; ?>" id="product_<?php echo $x; ?>" name="product[]" style="width:100%;" onchange="getProductData(<?php echo $x; ?>); handleFormChange()" required>
                               <option value=""></option>
                               <?php foreach ($products as $k => $v): ?>
                                 <option value="<?php echo $v['id'] ?>" <?php if($val['product_id'] == $v['id']) { echo "selected='selected'"; } ?>><?php echo $v['name'] ?></option>
                               <?php endforeach ?>
                             </select>
                           </td>
-                          <td><input type="text" name="qty[]" id="qty_<?php echo $x; ?>" class="form-control" required onkeyup="getTotal(<?php echo $x; ?>)" value="<?php echo $val['qty'] ?>" autocomplete="off"></td>
+                          <td><input type="text" name="qty[]" id="qty_<?php echo $x; ?>" class="form-control" required onkeyup="getTotal(<?php echo $x; ?>)" value="<?php echo $val['qty'] ?>" onchange="handleFormChange()" autocomplete="off"></td>
                           <td>
                             <input type="text" name="rate[]" id="rate_<?php echo $x; ?>" class="form-control" disabled value="<?php echo $val['rate'] ?>" autocomplete="off">
                             <input type="hidden" name="rate_value[]" id="rate_value_<?php echo $x; ?>" class="form-control" value="<?php echo $val['rate'] ?>" autocomplete="off">
@@ -136,7 +136,7 @@
                   <div class="form-group">
                     <label for="discount" class="col-sm-5 control-label">Discount</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="discount" name="discount" placeholder="Discount" onkeyup="subAmount()" value="<?php echo $order_data['order']['discount'] ?>" autocomplete="off">
+                      <input type="text" class="form-control" id="discount" name="discount" placeholder="Discount" onkeyup="subAmount()" onchange="handleFormChange()" value="<?php echo $order_data['order']['discount'] ?>" autocomplete="off">
                     </div>
                   </div>
                   <div class="form-group">
@@ -150,9 +150,9 @@
                   <div class="form-group">
                     <label for="paid_status" class="col-sm-5 control-label">Paid Status</label>
                     <div class="col-sm-7">
-                      <select type="text" class="form-control" id="paid_status" name="paid_status">
-                        <option value="1">Paid</option>
-                        <option value="2">Unpaid</option>
+                      <select type="text" class="form-control" id="paid_status" name="paid_status" onchange="handleFormChange()">
+                        <option value="1" <?php if($order_data['order']['paid_status'] == 1) { echo "selected='selected'"; } ?>>Paid</option>
+                        <option value="2" <?php if($order_data['order']['paid_status'] != 1) { echo "selected='selected'"; } ?>>Unpaid</option>
                       </select>
                     </div>
                   </div>
@@ -166,7 +166,7 @@
                
 
                 <a target="__blank" href="<?php echo base_url() . 'Controller_Orders/printDiv/'.$order_data['order']['id'] ?>" class="btn bg-blue" >Print</a>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-primary" id="submit_button" disabled>Save Changes</button>
                 <a href="<?php echo base_url('Controller_Orders/') ?>" class="btn btn-danger">Back</a>
               </div>
             </form>
@@ -183,6 +183,18 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
+<script>
+  // track the form's state and enable/disable the button accordingly
+  function handleFormChange() {
+    // Get the submit button element
+    var submitButton = document.getElementById('submit_button');
+
+    // Enable the submit button
+    submitButton.disabled = false;
+  }
+</script>
 
 <script type="text/javascript">
   var base_url = "<?php echo base_url(); ?>";
@@ -315,7 +327,7 @@
           subAmount();
         // Check if the quantity is equal to 0
         if (response.qty <= 0) {
-          alert('The item has insufficient quantities or is out of stock!');
+          alert('The item is out of stock!');
 
           // Reset product_id after the alert is closed
           // Set value to empty string and trigger change event

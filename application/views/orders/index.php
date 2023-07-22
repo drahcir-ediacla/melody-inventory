@@ -38,7 +38,7 @@
         <?php endif; ?>
 
         <?php if(in_array('createOrder', $user_permission)): ?>
-          <a href="<?php echo base_url('Controller_Orders/create') ?>" class="btn btn-primary">Add Order</a>
+          <a href="<?php echo base_url('Controller_Orders/create') ?>" class="btn btn-primary">Add New Order</a>
           <br /> <br />
         <?php endif; ?>
 
@@ -46,14 +46,14 @@
           
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="manageTable" class="table table-bordered table-hover table-striped">
+            <table id="manageTable" class="table table-bordered table-hover table-striped orders-table">
               <thead>
               <tr>
                 <th>Bill No.</th>
-                <th>Client</th>
-                <th>Contact</th>
-                <th>DateTime</th>
-                <th>Prod.Qty</th>
+                <th>Customer Name</th>
+                <th>Date/Time</th>
+                <th>Prod. Qty</th>
+                <th>Bill Status</th>
                 <th>Amount</th>
              
                 <?php if(in_array('updateOrder', $user_permission) || in_array('viewOrder', $user_permission) || in_array('deleteOrder', $user_permission)): ?>
@@ -150,7 +150,7 @@ function removeFunc(id)
             '</div>');
 
             // hide the modal
-            $j("#removeModal").modal('hide');
+            $("#removeModal").modal('hide');
 
           } else {
 

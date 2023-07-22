@@ -44,10 +44,10 @@
           
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="manageTable" class="table table-bordered table-hover table-striped">
+            <table id="manageTable" class="table table-bordered table-hover table-striped brand-table">
               <thead>
               <tr>
-                <th>Item</th>
+                <th>Brand</th>
                 <th>Status</th>
                 <?php if(in_array('updateBrand', $user_permission) || in_array('deleteBrand', $user_permission)): ?>
                   <th>Action</th>

@@ -45,7 +45,7 @@
          
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="manageTable" class="table table-bordered table-hover table-striped">
+            <table id="manageTable" class="table table-bordered table-hover table-striped variations-table">
               <thead>
               <tr>
                 <th>Element</th>

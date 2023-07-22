@@ -66,7 +66,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Members</td>
+                        <td>Users</td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="createUser" class="minimal"></td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="updateUser" class="minimal"></td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="viewUser" class="minimal"></td>
@@ -80,7 +80,7 @@
                         <td><input type="checkbox" name="permission[]" id="permission" value="deleteGroup" class="minimal"></td>
                       </tr>
                       <tr>
-                        <td>Items</td>
+                        <td>Brand</td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="createBrand" class="minimal"></td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="updateBrand" class="minimal"></td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="viewBrand" class="minimal"></td>
@@ -101,7 +101,7 @@
                         <td><input type="checkbox" name="permission[]" id="permission" value="deleteStore" class="minimal"></td>
                       </tr>
                       <tr>
-                        <td>Elements</td>
+                        <td>Variations</td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="createAttribute" class="minimal"></td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="updateAttribute" class="minimal"></td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="viewAttribute" class="minimal"></td>

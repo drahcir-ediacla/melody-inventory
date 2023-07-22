@@ -47,7 +47,7 @@
          
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="manageTable" class="table table-bordered table-hover table-striped dataTable no-footer ">
+            <table id="manageTable" class="table table-bordered table-hover table-striped dataTable no-footer prod-table ">
               <thead >
               <tr>
                 <th>Image</th>

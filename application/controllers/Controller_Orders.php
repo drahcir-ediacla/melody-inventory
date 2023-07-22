@@ -71,14 +71,14 @@ class Controller_Orders extends Admin_Controller
 			}
 
 			$result['data'][$key] = array(
-				$value['bill_no'],
-				$value['customer_name'],
-				$value['customer_phone'],
-				$date_time,
-				$count_total_item,
-				'₱'.$value['net_amount'],
-				// $paid_status,
-				$buttons
+					$value['bill_no'],
+					$value['customer_name'],
+					//$value['customer_phone'],
+					$date_time,
+					$count_total_item,
+					$paid_status,
+					'₱'.$value['net_amount'],
+					$buttons
 			);
 		} // /foreach
 
@@ -96,7 +96,7 @@ class Controller_Orders extends Admin_Controller
             redirect('dashboard', 'refresh');
         }
 
-		$this->data['page_title'] = 'Add Order';
+		$this->data['page_title'] = 'Add New Order';
 
 		$this->form_validation->set_rules('product[]', 'Product name', 'trim|required');
 		

@@ -92,7 +92,7 @@
                       <label for="groups"><?php echo $v['attribute_data']['name'] ?></label>
                       <select class="form-control select_group" id="attributes_value_id" name="attributes_value_id[]" multiple="multiple">
                         <?php foreach ($v['attribute_value'] as $k2 => $v2): ?>
-                          <option value="<?php echo $v2['id'] ?>" <?php if(in_array($v2['id'], $attribute_id)) { echo "selected"; } ?>><?php echo $v2['value'] ?></option>
+                          <option value="<?php echo $v2['id'] ?>" <?php if($attribute_id !== null && in_array($v2['id'], $attribute_id)) { echo "selected"; } ?>><?php echo $v2['value'] ?></option>
                         <?php endforeach ?>
                       </select>
                     </div>    
@@ -104,26 +104,27 @@
                   <?php $brand_data = json_decode($product_data['brand_id']); ?>
                   <select class="form-control select_group" id="brands" name="brands[]" multiple="multiple">
                     <?php foreach ($brands as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>" <?php if(in_array($v['id'], $brand_data)) { echo 'selected="selected"'; } ?>><?php echo $v['name'] ?></option>
+                      <option value="<?php echo $v['id'] ?>" <?php if($brand_data !== null && in_array($v['id'], $brand_data)) { echo 'selected="selected"'; } ?>><?php echo $v['name'] ?></option>
                     <?php endforeach ?>
                   </select>
                 </div>
 
                 <div class="form-group">
                   <label for="category">Category</label>
-                  <?php $category_data = json_decode($product_data['category_id']); ?>
-                  <select class="form-control select_group" id="category" name="category[]" multiple="multiple">
-                    <?php foreach ($category as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>" <?php if(in_array($v['id'], $category_data)) { echo 'selected="selected"'; } ?>><?php echo $v['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
+                    <?php $category_data = json_decode($product_data['category_id']); ?>
+                    <select class="form-control select_group" id="category" name="category[]" multiple="multiple">
+                        <?php foreach ($category as $k => $v): ?>
+                            <option value="<?php echo $v['id'] ?>" <?php if($category_data !== null && in_array($v['id'], $category_data)) { echo 'selected="selected"'; } ?>><?php echo $v['name'] ?></option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
+
 
                 <div class="form-group">
                   <label for="store">Warehouse</label>
                   <select class="form-control select_group" id="store" name="store">
                     <?php foreach ($stores as $k => $v): ?>
-                      <option value="<?php echo $v['name'] ?>" <?php if($product_data['store_id'] == $v['id']) { echo "selected='selected'"; } ?> ><?php echo $v['name'] ?></option>
+                      <option value="<?php echo $v['name'] ?>" <?php if($product_data['store_id'] == $v['id']) { echo 'selected="selected"'; } ?> ><?php echo $v['name'] ?></option>
                     <?php endforeach ?>
                   </select>
                 </div>

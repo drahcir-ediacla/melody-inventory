@@ -95,21 +95,7 @@ table.dataTable thead .sorting_desc_disabled:after {
   font-family: 'Glyphicons Halflings';
   opacity: 0.5;
 }
-table.dataTable thead .sorting:after {
-  opacity: 0.2;
-  content: "\e150";
-  /* sort */
-}
-table.dataTable thead .sorting_asc:after {
-  opacity: 0.2;
-  content: "\e150";
-  /* sort-by-attributes */
-}
-table.dataTable thead .sorting_desc:after {
-  opacity: 0.2;
-  content: "\e150";
-  /* sort-by-attributes-alt */
-}
+
 table.dataTable thead .sorting_asc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:after {
   color: #eee;
@@ -187,7 +173,36 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
 
 
 /* Custom CSS */
-table.dataTable thead th.sorting, table.dataTable thead th.sorting_asc {
+
+
+table.prod-table thead th.sorting:first-child, table.prod-table thead th.sorting_asc:first-child, table.prod-table thead th.sorting_desc:first-child {
   background-image: none;
 }
 
+table.prod-table thead th.sorting:last-child, table.prod-table thead th.sorting_asc:last-child, table.prod-table thead th.sorting_desc:last-child {
+  background-image: none;
+}
+
+table.category-table thead th.sorting:last-child, table.category-table thead th.sorting_asc:last-child, table.category-table thead th.sorting_desc:last-child {
+  background-image: none;
+}
+
+table.variations-table thead th.sorting:last-child, table.variations-table thead th.sorting_asc:last-child, table.variations-table thead th.sorting_desc:last-child {
+  background-image: none;
+}
+
+table.brand-table thead th.sorting:last-child, table.brand-table thead th.sorting_asc:last-child, table.brand-table thead th.sorting_desc:last-child {
+  background-image: none;
+}
+
+table.users-table thead th.sorting:last-child, table.users-table thead th.sorting_asc:last-child, table.users-table thead th.sorting_desc:last-child {
+  background-image: none;
+}
+
+table.permission-table thead th.sorting:last-child, table.permission-table thead th.sorting_asc:last-child, table.permission-table thead th.sorting_desc:last-child {
+  background-image: none;
+}
+
+table.orders-table thead th.sorting:last-child, table.orders-table thead th.sorting_asc:last-child, table.orders-table thead th.sorting_desc:last-child {
+  background-image: none;
+}

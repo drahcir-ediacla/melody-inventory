@@ -8,7 +8,7 @@ class Controller_Members extends Admin_Controller
 
 		$this->not_logged_in();
 		
-		$this->data['page_title'] = 'Members';
+		$this->data['page_title'] = 'Users';
 		
 
 		$this->load->model('model_users');

@@ -28,7 +28,7 @@
               <div class="inner">
                 <h3><?php echo $total_brands ?></h3>
 
-                <h4><b>Total Items</b></h4>
+                <h4><b>Total Brands</b></h4>
               </div>
               <div class="icon">
                 <i class="fa fa-cubes"></i>
@@ -58,7 +58,7 @@
               <div class="inner">
                 <h3><?php echo $total_attribures; ?></h3>
 
-               <h4><b>Total Elements</h4></b>
+               <h4><b>Total Variations</h4></b>
               </div>
               <div class="icon">
                 <i class="fa fa-files-o"></i>
@@ -137,7 +137,7 @@
               <div class="inner">
                 <h3><?php echo $total_users; ?></h3>
 
-                <h4><b>Total Members</b></h4>
+                <h4><b>Total Users</b></h4>
               </div>
               <div class="icon">
                 <i class="fa fa-users"></i>
