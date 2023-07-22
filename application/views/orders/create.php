@@ -100,7 +100,7 @@
                             <?php endforeach ?>
                           </select>
                         </td>
-                        <td><input type="number" name="qty[]" id="qty_1" class="form-control" required onchange="getTotal(1); checkStock(1)"></td>
+                        <td><input type="number" name="qty[]" id="qty_1" class="form-control" required onchange="getTotal(1); checkStock(1)" onkeyup="getTotal(1); checkStock(1)"></td>
                         <td>
                           <input type="number" name="rate[]" id="rate_1" class="form-control" disabled autocomplete="off">
                           <input type="hidden" name="rate_value[]" id="rate_value_1" class="form-control" autocomplete="off">
@@ -212,7 +212,7 @@
                         
                       html += '</select>'+
                     '</td>'+ 
-                    '<td><input type="number" name="qty[]" id="qty_'+row_id+'" class="form-control" onchange="getTotal('+row_id+'); checkStock('+row_id+')"></td>'+
+                    '<td><input type="number" name="qty[]" id="qty_'+row_id+'" class="form-control" onchange="getTotal('+row_id+'); checkStock('+row_id+')" onkeyup="getTotal('+row_id+'); checkStock('+row_id+')"></td>'+
                     '<td><input type="number" name="rate[]" id="rate_'+row_id+'" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_'+row_id+'" class="form-control"></td>'+
                     '<td><input type="number" name="amount[]" id="amount_'+row_id+'" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_'+row_id+'" class="form-control"></td>'+
                     '<td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(\''+row_id+'\')"><i class="fa fa-close"></i></button></td>'+

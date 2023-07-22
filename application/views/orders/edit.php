@@ -104,13 +104,13 @@
                               <?php endforeach ?>
                             </select>
                           </td>
-                          <td><input type="text" name="qty[]" id="qty_<?php echo $x; ?>" class="form-control" required onkeyup="getTotal(<?php echo $x; ?>)" value="<?php echo $val['qty'] ?>" onchange="handleFormChange()" autocomplete="off"></td>
+                          <td><input type="number" name="qty[]" id="qty_<?php echo $x; ?>" class="form-control" required onchange="getTotal(<?php echo $x; ?>); checkStock(<?php echo $x; ?>); handleFormChange()" oninput="getTotal(<?php echo $x; ?>); checkStock(<?php echo $x; ?>); handleFormChange()" value="<?php echo $val['qty'] ?>" autocomplete="off"></td>
                           <td>
-                            <input type="text" name="rate[]" id="rate_<?php echo $x; ?>" class="form-control" disabled value="<?php echo $val['rate'] ?>" autocomplete="off">
+                            <input type="number" name="rate[]" id="rate_<?php echo $x; ?>" class="form-control" disabled value="<?php echo $val['rate'] ?>" autocomplete="off">
                             <input type="hidden" name="rate_value[]" id="rate_value_<?php echo $x; ?>" class="form-control" value="<?php echo $val['rate'] ?>" autocomplete="off">
                           </td>
                           <td>
-                            <input type="text" name="amount[]" id="amount_<?php echo $x; ?>" class="form-control" disabled value="<?php echo $val['amount'] ?>" autocomplete="off">
+                            <input type="number" name="amount[]" id="amount_<?php echo $x; ?>" class="form-control" disabled value="<?php echo $val['amount'] ?>" autocomplete="off">
                             <input type="hidden" name="amount_value[]" id="amount_value_<?php echo $x; ?>" class="form-control" value="<?php echo $val['amount'] ?>" autocomplete="off">
                           </td>
                           <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow('<?php echo $x; ?>')"><i class="fa fa-close"></i></button></td>
@@ -254,9 +254,9 @@
                         
                       html += '</select>'+
                     '</td>'+ 
-                    '<td><input type="number" name="qty[]" id="qty_'+row_id+'" class="form-control" onkeyup="getTotal('+row_id+')"></td>'+
-                    '<td><input type="text" name="rate[]" id="rate_'+row_id+'" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_'+row_id+'" class="form-control"></td>'+
-                    '<td><input type="text" name="amount[]" id="amount_'+row_id+'" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_'+row_id+'" class="form-control"></td>'+
+                    '<td><input type="number" name="qty[]" id="qty_'+row_id+'" class="form-control" onchange="getTotal('+row_id+'); checkStock('+row_id+')" onkeyup="getTotal('+row_id+'); checkStock('+row_id+')"></td>'+
+                    '<td><input type="number" name="rate[]" id="rate_'+row_id+'" class="form-control" disabled><input type="hidden" name="rate_value[]" id="rate_value_'+row_id+'" class="form-control"></td>'+
+                    '<td><input type="number" name="amount[]" id="amount_'+row_id+'" class="form-control" disabled><input type="hidden" name="amount_value[]" id="amount_value_'+row_id+'" class="form-control"></td>'+
                     '<td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(\''+row_id+'\')"><i class="fa fa-close"></i></button></td>'+
                     '</tr>';
 
@@ -290,6 +290,35 @@
       alert('no row !! please refresh the page');
     }
   }
+
+   // Function to check stock
+function checkStock(row_id) {
+    var product_id = $("#product_" + row_id).val();
+    // Get the user input value
+    var userInput = parseInt($("#qty_" + row_id).val());
+    
+
+    // Fetch the actual quantity from the server and store it in the hidden input field
+    $.ajax({
+      url: base_url + 'Controller_Orders/getProductValueById',
+      type: 'post',
+      data: { product_id: product_id },
+      dataType: 'json',
+      success: function (data){        
+      var stockQty = data.qty;
+
+	if (userInput > data.qty) {
+        // alert(`The item has only ${stockQty} left in stock.`);
+        alert('The item has only ' + stockQty + ' left in stock.');
+        // Reset the quantity input field to the maximum available quantity (optional)
+        $("#qty_" + row_id).val(data.qty).change();
+        // Or you can reset it to an empty string to prevent further processing
+        // $("#qty_" + row_id).val("");
+        subAmount();
+      }
+    }
+  });
+}
 
   // get the product information from the server
   function getProductData(row_id)
