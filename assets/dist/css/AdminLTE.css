@@ -1257,7 +1257,7 @@ a:focus {
 .form-control {
   border-radius: 0;
   box-shadow: none;
-  border-color: #d2d6de;
+  border: #d2d6de;
 }
 .form-control:focus {
   border-color: #3c8dbc;
@@ -5008,3 +5008,12 @@ table.text-center th {
     
 }
 
+.form-row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.create-edit-box{
+  padding: 0 10px 0 10px;
+}

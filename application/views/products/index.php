@@ -46,12 +46,12 @@
         <div class="box">
          
           <!-- /.box-header -->
-          <div class="box-body">
-            <table id="manageTable" class="table table-bordered table-hover table-striped dataTable no-footer prod-table ">
+          <div class="box-body  scrollable"  role="region" aria-labelledby="caption" tabindex="0">
+            <table id="manageTable" class="table table-bordered table-hover table-striped dataTable no-footer prod-table">
               <thead >
               <tr>
                 <th>Image</th>
-                
+                <th>SKU</th>
                 <th>Product</th>
                 <th>Price</th>
                 <th>Qty</th>

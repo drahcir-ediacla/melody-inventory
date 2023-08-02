@@ -57,7 +57,7 @@ class Controller_Products extends Admin_Controller
 
 			$img = '<img src="'.base_url($value['image']).'" alt="'.$value['name'].'" class="img-circle" width="50" height="50" />';
 
-            $availability = ($value['availability'] == 1) ? '<span class="label label-success">Active</span>' : '<span class="label label-warning">Inactive</span>';
+            $availability = ($value['availability'] == 1) ? '<span class="label label-success">Available</span>' : '<span class="label label-warning">Discontinue</span>';
 
             $qty_status = '';
             if ($value['qty'] <= 0) {
@@ -69,7 +69,7 @@ class Controller_Products extends Admin_Controller
 
 			$result['data'][$key] = array(
 				$img,
-				// $value['sku'],
+				$value['sku'],
 				$value['name'],
 				'$'.$value['price'],
                 $value['qty'] . ' ' . $qty_status,
@@ -109,7 +109,7 @@ class Controller_Products extends Admin_Controller
 
         	$data = array(
         		'name' => $this->input->post('product_name'),
-        		// 'sku' => $this->input->post('sku'),
+        		'sku' => $this->input->post('sku'),
         		'price' => $this->input->post('price'),
         		'qty' => $this->input->post('qty'),
         		'image' => $upload_image,
