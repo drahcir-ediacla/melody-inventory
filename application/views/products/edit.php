@@ -132,8 +132,8 @@
                 <div class="form-group">
                   <label for="store">Availability</label>
                   <select class="form-control" id="availability" name="availability">
-                    <option value="1" <?php if($product_data['availability'] == 1) { echo "selected='selected'"; } ?>>Yes</option>
-                    <option value="2" <?php if($product_data['availability'] != 1) { echo "selected='selected'"; } ?>>No</option>
+                    <option value="1" <?php if($product_data['availability'] == 1) { echo "selected='selected'"; } ?>>Available</option>
+                    <option value="2" <?php if($product_data['availability'] != 1) { echo "selected='selected'"; } ?>>Discontinue</option>
                   </select>
                 </div>
 

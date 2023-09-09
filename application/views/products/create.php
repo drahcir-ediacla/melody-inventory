@@ -41,7 +41,7 @@
         <?php endif; ?>
 
 
-        <div class="box">
+        <div class="box create-edit-box">
          
           <!-- /.box-header -->
           <form role="form" action="<?php base_url('users/create') ?>" method="post" enctype="multipart/form-data">
@@ -58,82 +58,95 @@
                       </div>
                   </div>
                 </div>
-
-                <div class="form-group">
-                  <label for="product_name">Product name</label>
-                  <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter product name" autocomplete="off"/>
+                <div class="form-row">  
+                  <div class="form-group" style="width: 60%">
+                    <label for="product_name">Model Name</label>
+                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter model name" autocomplete="off"/>
+                  </div>
+                  <div class="form-group" style="width: 15%">
+                    <label for="model_number">Model Number</label>
+                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter model number" autocomplete="off"/>
+                  </div>
+                  <div class="form-group" style="width: 15%">
+                    <label for="serial_number">Serial Number</label>
+                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter serial number" autocomplete="off"/>
+                  </div>
                 </div>
-
                 <!-- <div class="form-group"> -->
                   <!-- <label for="sku">SKU</label> -->
                   <!-- <input type="text" class="form-control" id="sku" name="sku" placeholder="Enter sku" autocomplete="off" /> -->
                 <!-- </div> -->
+              <div class="form-row">
+                <div class="form-group" style="width: 10%">
+                    <label for="qty">Qty</label>
+                    <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter quantity" autocomplete="off" />
+                  </div>
 
+                  <div class="form-group" style="width: 10%">
+                    <label for="price">Billing Price</label>
+                    <input type="text" class="form-control" id="price" name="price" placeholder="Enter billing price" autocomplete="off" />
+                  </div>
+
+                  <div class="form-group" style="width: 10%">
+                    <label for="wholesale_price">Wholesale Price</label>
+                    <input type="text" class="form-control" id="wholesale_price" name="price" placeholder="Enter billing price" autocomplete="off" />
+                  </div>
+
+                  <div class="form-group" style="width: 30%">
+                    <label for="brand_name">Brand Name</label>
+                    <input type="text" class="form-control" id="brand_name" name="brand_name" placeholder="Enter brand name" autocomplete="off"/>
+                  </div>
+
+                  <div class="form-group" style="width: 30%">
+                    <label for="store">Warehouse</label>
+                    <select class="form-control select_group" id="store" name="store">
+                      <?php foreach ($stores as $k => $v): ?>
+                        <option value="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></option>
+                      <?php endforeach ?>
+                    </select>
+                  </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group" style="width: 23%">
+                    <label for="color">Color</label>
+                    <input type="text" class="form-control" id="color" name="color" placeholder="Enter color" autocomplete="off" />
+                  </div>
+
+                  <div class="form-group" style="width: 23%">
+                    <label for="size_a">Size (A)</label>
+                    <input type="text" class="form-control" id="size_a" name="size_a" placeholder="Enter size" autocomplete="off" />
+                  </div>
+
+                  <div class="form-group" style="width: 23%">
+                    <label for="dbl">DBL</label>
+                    <input type="text" class="form-control" id="dbl" name="dbl" placeholder="Enter DBL" autocomplete="off" />
+                  </div>
+
+                  <div class="form-group" style="width: 23%">
+                    <label for="temple_size">Temple Size</label>
+                    <input type="text" class="form-control" id="temple_size" name="temple_size" placeholder="Enter brand name" autocomplete="off"/>
+                  </div>
+              </div>
+
+                <div class="field">
+                        <div class="icon"><i class="fa-solid fa-calendar"></i></div>
+                        <input id="checkIn" type="datecheck" placeholder=" Check In">
+                    </div>
                 <div class="form-group">
-                  <label for="price">Price</label>
-                  <input type="text" class="form-control" id="price" name="price" placeholder="Enter price" autocomplete="off" />
+                  <label for="store">Availability</label>
+                  <select class="form-control" id="availability" name="availability">
+                    <option value="1">Available</option>
+                    <option value="2">Discontinue</option>
+                  </select>
                 </div>
 
                 <div class="form-group">
-                  <label for="qty">Qty</label>
-                  <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter Qty" autocomplete="off" />
-                </div>
-
-                <div class="form-group">
-                  <label for="description">Description</label>
+                  <label for="description">Note</label>
                   <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter 
                   Description" autocomplete="off">
                   </textarea>
                 </div>
-
-                <?php if($attributes): ?>
-                  <?php foreach ($attributes as $k => $v): ?>
-                    <div class="form-group">
-                      <label for="groups"><?php echo $v['attribute_data']['name'] ?></label>
-                      <select class="form-control select_group" id="attributes_value_id" name="attributes_value_id[]" multiple="multiple">
-                        <?php foreach ($v['attribute_value'] as $k2 => $v2): ?>
-                          <option value="<?php echo $v2['id'] ?>"><?php echo $v2['value'] ?></option>
-                        <?php endforeach ?>
-                      </select>
-                    </div>    
-                  <?php endforeach ?>
-                <?php endif; ?>
-
-                <div class="form-group">
-                  <label for="brands">Items</label>
-                  <select class="form-control select_group" id="brands" name="brands[]" multiple="multiple">
-                    <?php foreach ($brands as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="category">Category</label>
-                  <select class="form-control select_group" id="category" name="category[]" multiple="multiple">
-                    <?php foreach ($category as $k => $v): ?>
-                      <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="store">Warehouse</label>
-                  <select class="form-control select_group" id="store" name="store">
-                    <?php foreach ($stores as $k => $v): ?>
-                      <option value="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></option>
-                    <?php endforeach ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="store">Availability</label>
-                  <select class="form-control" id="availability" name="availability">
-                    <option value="1">Yes</option>
-                    <option value="2">No</option>
-                  </select>
-                </div>
-
               </div>
               <!-- /.box-body -->
 
@@ -196,3 +209,5 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>flatpickr("input[type=datecheck]", {});</script>
